@@ -4,6 +4,7 @@ import { ProductGallery } from "@/components/shop/ProductGallery";
 import { ProductInfo } from "@/components/shop/ProductInfo";
 import { ProductDetails } from "@/components/shop/ProductDetails";
 import { ProductReviews } from "@/components/shop/ProductReviews";
+import { ProductFAQ } from "@/components/shop/ProductFAQ";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -58,6 +59,11 @@ export default async function ProductPage(props: ProductPageProps) {
                 {/* Reviews Section */}
                 <div className="mt-24 border-t pt-16">
                     <ProductReviews product={product} />
+                </div>
+
+                {/* FAQ Section */}
+                <div className="mt-24 border-t pt-16">
+                    <ProductFAQ product={product} />
                 </div>
             </div>
         </div>

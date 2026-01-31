@@ -8,6 +8,11 @@ export type Review = {
     verified?: boolean;
 };
 
+export type FAQItem = {
+    question: string;
+    answer: string;
+};
+
 export type Product = {
     id: string;
     name: string;
@@ -29,6 +34,7 @@ export type Product = {
     bestseller?: boolean;
     variants?: { id: string; name: string; price: number }[];
     userReviews?: Review[];
+    faqs?: FAQItem[];
 };
 
 export const products: Product[] = [
@@ -98,6 +104,20 @@ export const products: Product[] = [
                 title: "Good but pricey",
                 comment: "The results are there, but I wish the bottle was bigger for the price. Still, I will probably repurchase.",
                 verified: false
+            }
+        ],
+        faqs: [
+            {
+                question: "Can I use this with retinol?",
+                answer: "Yes, you can use Vitamin C in the morning and Retinol at night. Avoid using them at the exact same time to prevent irritation."
+            },
+            {
+                question: "Is this suitable for sensitive skin?",
+                answer: "Our formula is gentle, but Vitamin C can be potent. We recommend patch testing first or starting with every other day usage."
+            },
+            {
+                question: "How long does a bottle last?",
+                answer: "With daily use (3-4 drops), a 30ml bottle typically lasts about 2-3 months."
             }
         ]
     },
