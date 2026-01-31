@@ -3,6 +3,7 @@ import { products } from "@/lib/products";
 import { ProductGallery } from "@/components/shop/ProductGallery";
 import { ProductInfo } from "@/components/shop/ProductInfo";
 import { ProductDetails } from "@/components/shop/ProductDetails";
+import { ProductReviews } from "@/components/shop/ProductReviews";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -53,6 +54,11 @@ export default async function ProductPage(props: ProductPageProps) {
 
                 {/* Full Width Details Section */}
                 <ProductDetails product={product} />
+
+                {/* Reviews Section */}
+                <div className="mt-24 border-t pt-16">
+                    <ProductReviews product={product} />
+                </div>
             </div>
         </div>
     );

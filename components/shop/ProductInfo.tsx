@@ -5,12 +5,15 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Product } from "@/lib/products";
 import { Separator } from "@/components/ui/separator";
+import { useCart } from "@/context/CartContext";
 
 interface ProductInfoProps {
     product: Product;
 }
 
 export function ProductInfo({ product }: ProductInfoProps) {
+    const { addToCart } = useCart();
+
     return (
         <div className="flex flex-col gap-6">
             <div>
@@ -53,7 +56,11 @@ export function ProductInfo({ product }: ProductInfoProps) {
             {/* Actions */}
             <div className="flex flex-col gap-4">
                 <div className="flex gap-4">
-                    <Button size="lg" className="flex-1 text-lg py-6 rounded-full shadow-md hover:shadow-lg transition-all">
+                    <Button
+                        size="lg"
+                        className="flex-1 text-lg py-6 rounded-full shadow-md hover:shadow-lg transition-all"
+                        onClick={() => addToCart(product)}
+                    >
                         Add to Cart - ₹{product.price.toLocaleString("en-IN")}
                     </Button>
                     <Button size="icon" variant="outline" className="h-14 w-14 rounded-full border-primary/20 text-primary hover:bg-primary/5">

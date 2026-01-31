@@ -7,12 +7,20 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Product } from "@/lib/products";
+import { useCart } from "@/context/CartContext";
 
 interface ProductCardProps {
     product: Product;
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+    const { addToCart } = useCart();
+
+    const handleAddToCart = (e: React.MouseEvent) => {
+        e.preventDefault(); // Prevent navigation to product page
+        addToCart(product);
+    };
+
     return (
         <Link href={`/shop/${product.id}`} className="group">
             <Card className="border-none shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden bg-card h-full flex flex-col p-0 gap-0">
@@ -73,7 +81,12 @@ export function ProductCard({ product }: ProductCardProps) {
 
                 <CardFooter className="px-4 pb-4 pt-0 flex justify-between items-center">
                     <span className="font-bold text-lg">₹{product.price.toLocaleString("en-IN")}</span>
-                    <Button size="sm" variant="outline" className="rounded-full px-4 hover:bg-primary hover:text-white transition-colors">
+                    <Button
+                        size="sm"
+                        variant="outline"
+                        className="rounded-full px-4 hover:bg-primary hover:text-white transition-colors"
+                        onClick={handleAddToCart}
+                    >
                         Add to Cart
                     </Button>
                 </CardFooter>

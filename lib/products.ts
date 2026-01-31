@@ -1,3 +1,13 @@
+export type Review = {
+    id: string;
+    user: string;
+    rating: number;
+    date: string;
+    title: string;
+    comment: string;
+    verified?: boolean;
+};
+
 export type Product = {
     id: string;
     name: string;
@@ -16,6 +26,9 @@ export type Product = {
     ingredients: { name: string; description: string; featured: boolean }[];
     usage: string[];
     warnings?: string;
+    bestseller?: boolean;
+    variants?: { id: string; name: string; price: number }[];
+    userReviews?: Review[];
 };
 
 export const products: Product[] = [
@@ -52,7 +65,41 @@ export const products: Product[] = [
             "Follow with moisturizer.",
             "Use consistently in the morning."
         ],
-        warnings: "For external use only. Patch test recommended. Discontinue if irritation occurs."
+        warnings: "For external use only. Patch test recommended. Discontinue if irritation occurs.",
+        bestseller: true,
+        variants: [
+            { id: "1-30ml", name: "30ml", price: 3599 },
+            { id: "1-50ml", name: "50ml", price: 5499 }
+        ],
+        userReviews: [
+            {
+                id: "r1",
+                user: "Sarah M.",
+                rating: 5,
+                date: "2 months ago",
+                title: "Game changer for dark spots!",
+                comment: "I've been using this for 6 weeks and my acne scars have significantly faded. It gives such a nice glow without being sticky.",
+                verified: true
+            },
+            {
+                id: "r2",
+                user: "Jessica K.",
+                rating: 5,
+                date: "1 month ago",
+                title: "Best Vitamin C I've tried",
+                comment: "Doesn't oxidize quickly like other brands. Smells fresh and feels great on the skin.",
+                verified: true
+            },
+            {
+                id: "r3",
+                user: "Emily R.",
+                rating: 4,
+                date: "3 weeks ago",
+                title: "Good but pricey",
+                comment: "The results are there, but I wish the bottle was bigger for the price. Still, I will probably repurchase.",
+                verified: false
+            }
+        ]
     },
     {
         id: "2",
@@ -84,6 +131,11 @@ export const products: Product[] = [
             "Use as the last step of your PM routine.",
             "Warm a pea-sized amount in palms.",
             "Gently press into skin."
+        ],
+        bestseller: false,
+        variants: [
+            { id: "2-50ml", name: "50ml", price: 2999 },
+            { id: "2-100ml", name: "100ml", price: 4999 }
         ]
     },
     {
@@ -117,6 +169,10 @@ export const products: Product[] = [
             "Leave on for 10-15 minutes.",
             "Rinse thoroughly with warm water.",
             "Use 1-2 times weekly."
+        ],
+        bestseller: true,
+        variants: [
+            { id: "3-100g", name: "100g", price: 2499 }
         ]
     },
     {
@@ -150,7 +206,11 @@ export const products: Product[] = [
             "Start usage 2-3 times a week.",
             "Always use sunscreen the next morning."
         ],
-        warnings: "Not safe for use during pregnancy or breastfeeding. Use SPF daily."
+        warnings: "Not safe for use during pregnancy or breastfeeding. Use SPF daily.",
+        bestseller: true,
+        variants: [
+            { id: "4-30ml", name: "30ml", price: 4999 }
+        ]
     },
     {
         id: "5",
@@ -181,6 +241,11 @@ export const products: Product[] = [
             "Massage onto dry or damp skin.",
             "Rinse with lukewarm water.",
             "Use morning and night."
+        ],
+        bestseller: false,
+        variants: [
+            { id: "5-150ml", name: "150ml", price: 1899 },
+            { id: "5-300ml", name: "300ml", price: 2999 }
         ]
     },
 ];

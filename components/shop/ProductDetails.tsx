@@ -2,7 +2,7 @@
 
 import { Product } from "@/lib/products";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { AlertCircle, Droplets, Sparkles, ScrollText, CheckCircle2 } from "lucide-react";
+import { AlertCircle, Droplets, Sparkles, ScrollText, CheckCircle2, Star } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 
