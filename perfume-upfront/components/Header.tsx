@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Search, Heart, ShoppingBag, User, Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useCart } from "@/context/CartContext";
 
 
 const NAV_LINKS = [
@@ -27,6 +28,7 @@ export default function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [announcementIndex, setAnnouncementIndex] = useState(0);
+    const { cartCount } = useCart();
 
     // Handle scroll for sticky header proper styling
     useEffect(() => {
@@ -52,7 +54,7 @@ export default function Header() {
                     "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
                     isScrolled
                         ? "bg-contrast-black/95 backdrop-blur-md shadow-sm py-2 border-b border-gray-800"
-                        : "bg-transparent py-4 border-b border-white/10"
+                        : "bg-transparent py-3 border-b border-white/10"
                 )}
             >
                 <div className="container mx-auto px-4 lg:px-8">
@@ -94,14 +96,16 @@ export default function Header() {
                             <button className="p-2 hover:bg-white/10 rounded-full transition-colors hidden sm:block" aria-label="Wishlist">
                                 <Heart className="w-5 h-5" />
                             </button>
-                            <button className="p-2 hover:bg-white/10 rounded-full transition-colors" aria-label="Cart">
+                            <Link href="/cart" className="p-2 hover:bg-white/10 rounded-full transition-colors" aria-label="Cart">
                                 <div className="relative">
                                     <ShoppingBag className="w-5 h-5" />
-                                    <span className="absolute -top-1 -right-1 bg-gold-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">
-                                        0
-                                    </span>
+                                    {cartCount > 0 && (
+                                        <span className="absolute -top-1 -right-1 bg-gold-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">
+                                            {cartCount}
+                                        </span>
+                                    )}
                                 </div>
-                            </button>
+                            </Link>
                             <button className="p-2 hover:bg-white/10 rounded-full transition-colors hidden sm:block" aria-label="Account">
                                 <User className="w-5 h-5" />
                             </button>
@@ -122,7 +126,7 @@ export default function Header() {
             <div
                 className={cn(
                     "fixed left-0 right-0 z-40 bg-black text-white text-center py-2 transition-all duration-300",
-                    isScrolled ? "top-[60px]" : "top-[80px] lg:top-[90px]"
+                    isScrolled ? "top-[60px]" : "top-[75px] lg:top-[85px]"
                 )}
             >
                 <p className="text-xs font-medium tracking-widest uppercase animate-fade-in">
@@ -131,32 +135,36 @@ export default function Header() {
             </div>
 
             {/* Spacer to prevent content overlap */}
-            <div className="h-[110px] lg:h-[130px]" />
+            <div className="h-[100px] lg:h-[120px]" />
 
             {/* Mobile Menu Overlay */}
             {mobileMenuOpen && (
-                <div className="fixed inset-0 z-40 bg-white pt-24 px-6 lg:hidden animate-fade-in">
+                <div className="fixed inset-0 z-40 bg-[#050505] pt-24 px-6 lg:hidden animate-fade-in">
                     <nav className="flex flex-col gap-6">
                         {NAV_LINKS.map((link) => (
                             <Link
                                 key={link.href}
                                 href={link.href}
-                                className="text-lg font-medium border-b border-gray-100 pb-2 flex justify-between items-center"
+                                className={cn(
+                                    "text-lg font-medium border-b border-white/10 pb-4 flex justify-between items-center transition-colors",
+                                    // @ts-ignore
+                                    link.highlight ? "text-gold-400" : "text-white/90"
+                                )}
                                 onClick={() => setMobileMenuOpen(false)}
                             >
                                 {link.label}
-                                <ChevronDown className="-rotate-90 w-4 h-4 text-gray-400" />
+                                <ChevronDown className="-rotate-90 w-4 h-4 text-white/40" />
                             </Link>
                         ))}
-                        <div className="flex gap-4 mt-4 justify-center">
-                            <Link href="/account" className="flex flex-col items-center gap-1 text-xs uppercase" onClick={() => setMobileMenuOpen(false)}>
-                                <div className="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center">
+                        <div className="flex gap-4 mt-8 justify-center border-t border-white/10 pt-8">
+                            <Link href="/account" className="flex flex-col items-center gap-2 text-xs uppercase text-white/80" onClick={() => setMobileMenuOpen(false)}>
+                                <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center border border-white/10">
                                     <User className="w-5 h-5" />
                                 </div>
                                 Account
                             </Link>
-                            <Link href="/wishlist" className="flex flex-col items-center gap-1 text-xs uppercase" onClick={() => setMobileMenuOpen(false)}>
-                                <div className="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center">
+                            <Link href="/wishlist" className="flex flex-col items-center gap-2 text-xs uppercase text-white/80" onClick={() => setMobileMenuOpen(false)}>
+                                <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center border border-white/10">
                                     <Heart className="w-5 h-5" />
                                 </div>
                                 Wishlist

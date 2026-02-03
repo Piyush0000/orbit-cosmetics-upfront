@@ -1,47 +1,8 @@
 import ProductCard from "./ProductCard";
 
-const PRODUCTS = [
-    {
-        id: "1",
-        name: "Noir Extreme",
-        brand: "Tom Ford",
-        price: 12500,
-        rating: 4.8,
-        image: "https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=700&auto=format&fit=crop",
-        imageHover: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?q=80&w=700&auto=format&fit=crop",
-        longevity: "12H Long Lasting",
-        tag: "Best Seller"
-    },
-    {
-        id: "2",
-        name: "Sauvage Elixir",
-        brand: "Dior",
-        price: 14800,
-        rating: 4.9,
-        image: "https://images.unsplash.com/photo-1594035910387-fea4779426e9?q=80&w=700&auto=format&fit=crop",
-        longevity: "10H Long Lasting",
-        tag: "Trending"
-    },
-    {
-        id: "3",
-        name: "Bleu de Chanel",
-        brand: "Chanel",
-        price: 11200,
-        rating: 4.7,
-        image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?q=80&w=700&auto=format&fit=crop",
-        longevity: "8H Moderate",
-    },
-    {
-        id: "4",
-        name: "Black Opium",
-        brand: "Yves Saint Laurent",
-        price: 9800,
-        rating: 4.8,
-        image: "https://images.unsplash.com/photo-1615160359300-47401c107ae7?q=80&w=700&auto=format&fit=crop",
-        longevity: "8H Long Lasting",
-        tag: "Hot"
-    }
-];
+import { products } from "@/lib/data";
+
+const PRODUCTS = products.slice(0, 4);
 
 export default function BestSellers() {
     return (
