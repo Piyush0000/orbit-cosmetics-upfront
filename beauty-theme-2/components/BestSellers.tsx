@@ -15,50 +15,50 @@ const products = [
 
 export function BestSellers() {
     return (
-        <section id="bestsellers" className="py-20 px-4 bg-secondary/30">
+        <section id="bestsellers" className="py-24 px-4 bg-background border-t border-border/40">
             <div className="max-w-7xl mx-auto">
-                <div className="text-center mb-12">
-                    <Badge variant="outline" className="mb-4 px-4 py-1 border-primary/50 text-primary text-sm uppercase tracking-widest">
+                <div className="text-center mb-16">
+                    <span className="text-primary text-sm uppercase tracking-[0.2em] font-medium mb-3 block">
                         Customer Favorites
-                    </Badge>
-                    <h2 className="text-3xl md:text-5xl font-bold font-serif text-foreground">
+                    </span>
+                    <h2 className="text-4xl md:text-5xl font-serif text-foreground">
                         Best Sellers
                     </h2>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
                     {products.map((product) => (
-                        <Card key={product.id} className="group overflow-hidden border-none shadow-sm hover:shadow-xl transition-all duration-300 bg-card p-0 gap-0">
-                            <div className="relative aspect-[4/5] overflow-hidden bg-muted">
+                        <Card key={product.id} className="group overflow-hidden border-none shadow-none bg-transparent rounded-none">
+                            <div className="relative aspect-[3/4] overflow-hidden bg-muted mb-4 rounded-sm">
                                 <Image
                                     src={product.image}
                                     alt={product.name}
                                     fill
-                                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                                 />
-                                <Badge className="absolute top-4 left-4 bg-primary text-primary-foreground hover:bg-primary/90">
+                                <Badge className="absolute top-3 left-3 bg-white/90 text-black hover:bg-white backdrop-blur-sm rounded-none px-3 font-normal tracking-wide text-xs uppercase shadow-sm">
                                     Bestseller
                                 </Badge>
-                                <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                                    <Button className="w-full gap-2 shadow-lg" size="lg">
+                                <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
+                                    <Button className="w-full gap-2 shadow-lg rounded-none bg-white/90 text-black hover:bg-white border-none backdrop-blur-md" size="lg">
                                         <ShoppingBag className="w-4 h-4" /> Add to Cart
                                     </Button>
                                 </div>
                             </div>
-                            <CardContent className="pt-6 pb-6">
-                                <p className="text-sm text-muted-foreground mb-2">{product.category}</p>
-                                <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors line-clamp-1">
+                            <CardContent className="p-0 text-center">
+                                <p className="text-xs text-muted-foreground mb-1 uppercase tracking-wider">{product.category}</p>
+                                <h3 className="text-lg font-medium mb-1 group-hover:text-primary transition-colors line-clamp-1 font-serif">
                                     {product.name}
                                 </h3>
-                                <p className="text-xl font-bold text-primary">{product.price}</p>
+                                <p className="text-lg text-primary">{product.price}</p>
                             </CardContent>
                         </Card>
                     ))}
                 </div>
 
-                <div className="mt-12 text-center">
+                <div className="mt-16 text-center">
                     <Link href="/shop">
-                        <Button variant="outline" size="lg" className="min-w-[200px]">
+                        <Button variant="outline" size="lg" className="min-w-[200px] rounded-full border-primary/20 text-foreground hover:bg-primary/5 hover:text-primary hover:border-primary/50 transition-all uppercase tracking-widest text-xs h-12">
                             View All Products
                         </Button>
                     </Link>

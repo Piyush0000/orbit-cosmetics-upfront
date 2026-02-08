@@ -18,12 +18,16 @@ export function Hero() {
           Discover a curated collection of premium skincare and beauty essentials designed to enhance your natural glow.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button size="lg" className="text-lg px-8 py-6 rounded-full shadow-lg hover:scale-105 transition-transform">
-            Shop Skincare
-          </Button>
-          <Button size="lg" variant="outline" className="text-lg px-8 py-6 rounded-full bg-white/50 backdrop-blur-sm border-white/50 hover:bg-white/80 transition-all hover:scale-105">
-            Explore Beauty
-          </Button>
+          <Link href="/shop">
+            <Button size="lg" className="text-lg px-8 py-6 rounded-full shadow-lg hover:scale-105 transition-transform">
+              Shop Skincare
+            </Button>
+          </Link>
+          <Link href="/shop">
+            <Button size="lg" variant="outline" className="text-lg px-8 py-6 rounded-full bg-white/50 backdrop-blur-sm border-white/50 hover:bg-white/80 transition-all hover:scale-105">
+              Explore Beauty
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
