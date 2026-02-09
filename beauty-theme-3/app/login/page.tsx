@@ -21,33 +21,33 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen bg-background flex items-center justify-center px-4 py-20 text-foreground">
+        <div className="min-h-screen bg-background flex items-center justify-center px-4 py-20 animate-in fade-in duration-500">
             <div className="w-full max-w-md space-y-8">
                 <div className="text-center">
-                    <h1 className="text-3xl font-serif font-bold tracking-tight text-primary">Welcome Back</h1>
+                    <h1 className="text-3xl font-serif font-bold tracking-tight">Welcome Back</h1>
                     <p className="mt-2 text-sm text-muted-foreground">
                         Sign in to your account
                     </p>
                 </div>
 
-                <div className="space-y-6 bg-card p-8 rounded-xl border border-border/40 shadow-xl relative overflow-hidden">
+                <div className="space-y-6 bg-card p-8 rounded-xl border shadow-sm">
                     <form onSubmit={handleLogin} className="space-y-4">
                         <div className="space-y-2">
-                            <label className="text-sm font-medium leading-none text-foreground" htmlFor="email">Email</label>
-                            <Input id="email" placeholder="m@example.com" type="email" required className="h-12 bg-background/50 border-input focus:border-primary text-foreground placeholder:text-muted-foreground" />
+                            <label className="text-sm font-medium leading-none" htmlFor="email">Email</label>
+                            <Input id="email" placeholder="m@example.com" type="email" required className="h-12" />
                         </div>
                         <div className="space-y-2">
-                            <label className="text-sm font-medium leading-none text-foreground" htmlFor="password">Password</label>
-                            <Input id="password" type="password" required className="h-12 bg-background/50 border-input focus:border-primary text-foreground placeholder:text-muted-foreground" />
+                            <label className="text-sm font-medium leading-none" htmlFor="password">Password</label>
+                            <Input id="password" type="password" required className="h-12" />
                         </div>
 
-                        <Button className="w-full py-6 text-lg tracking-wide font-medium bg-primary text-primary-foreground hover:bg-primary/90" disabled={loading}>
+                        <Button className="w-full py-6 text-lg" disabled={loading}>
                             {loading ? "Signing In..." : "Sign In"}
                         </Button>
                     </form>
 
                     <div className="text-center text-sm">
-                        <Link href="#" className="underline underline-offset-4 hover:text-primary text-muted-foreground">
+                        <Link href="#" className="underline underline-offset-4 hover:text-primary">
                             Forgot password?
                         </Link>
                     </div>
@@ -55,7 +55,7 @@ export default function LoginPage() {
 
                 <div className="text-center text-sm text-muted-foreground">
                     Don&apos;t have an account?{" "}
-                    <Link href="/signup" className="underline underline-offset-4 hover:text-primary font-medium text-primary">
+                    <Link href="/signup" className="underline underline-offset-4 hover:text-primary font-medium">
                         Sign up
                     </Link>
                 </div>

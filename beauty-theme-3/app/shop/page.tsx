@@ -52,10 +52,10 @@ export default function ShopPage() {
     return (
         <div className="bg-background min-h-screen pb-20">
             {/* Header / Breadcrumb Area */}
-            <div className="bg-secondary/30 py-12 px-4 mb-8">
+            <div className="bg-primary py-12 px-4 mb-8">
                 <div className="max-w-7xl mx-auto text-center">
-                    <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">Shop All</h1>
-                    <p className="text-muted-foreground max-w-2xl mx-auto">
+                    <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4 text-primary-foreground">Shop All</h1>
+                    <p className="text-primary-foreground/80 max-w-2xl mx-auto">
                         Discover clean, effective beauty essentials designed to enhance your natural radiance.
                     </p>
                 </div>

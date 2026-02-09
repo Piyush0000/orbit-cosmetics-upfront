@@ -55,7 +55,7 @@ export function ProductFilters({
                     <AccordionContent>
                         <div className="space-y-2">
                             {filters.categories.map((category) => (
-                                <div key={category} className="flex items-center space-x-2">
+                                <div key={category} className="flex items-center space-x-2 py-1">
                                     <Checkbox
                                         id={`category-${category}`}
                                         checked={selectedCategories.includes(category)}
@@ -74,7 +74,7 @@ export function ProductFilters({
                     <AccordionContent>
                         <div className="space-y-2">
                             {filters.skinTypes.map((type) => (
-                                <div key={type} className="flex items-center space-x-2">
+                                <div key={type} className="flex items-center space-x-2 py-1">
                                     <Checkbox
                                         id={`skin-${type}`}
                                         checked={selectedSkinTypes.includes(type)}
@@ -93,7 +93,7 @@ export function ProductFilters({
                     <AccordionContent>
                         <div className="space-y-2">
                             {filters.productTypes.map((type) => (
-                                <div key={type} className="flex items-center space-x-2">
+                                <div key={type} className="flex items-center space-x-2 py-1">
                                     <Checkbox
                                         id={`type-${type}`}
                                         checked={selectedProductTypes.includes(type)}
@@ -112,7 +112,7 @@ export function ProductFilters({
                     <AccordionContent>
                         <div className="space-y-2">
                             {filters.priceRanges.map((range, idx) => (
-                                <div key={idx} className="flex items-center space-x-2">
+                                <div key={idx} className="flex items-center space-x-2 py-1">
                                     <Checkbox
                                         id={`price-${idx}`}
                                         checked={selectedPriceRanges.includes(idx)}

@@ -88,7 +88,7 @@ export default function ShopPage() {
                                 </Button>
                             </SheetTrigger>
                             <SheetContent side="left" className="w-[300px] overflow-y-auto">
-                                <div className="mt-6">
+                                <div className="py-6 px-6">
                                     <ProductFilters
                                         selectedCategories={selectedCategories}
                                         setSelectedCategories={setSelectedCategories}
