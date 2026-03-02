@@ -1,0 +1,126 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+}
+
+:root {
+  --radius: 1rem;
+
+  /* ✦ Lavender Dreams — Soft, Dreamy, Feminine Luxury */
+  /* Cool pearl-white background */
+  --background: oklch(0.985 0.008 290);
+  /* Deep plum-charcoal text */
+  --foreground: oklch(0.2 0.03 300);
+
+  /* Cards: icy white with a faint violet tint */
+  --card: oklch(0.995 0.005 290);
+  --card-foreground: oklch(0.2 0.03 300);
+
+  --popover: oklch(0.995 0.005 290);
+  --popover-foreground: oklch(0.2 0.03 300);
+
+  /* Primary: Rich lavender / soft violet */
+  --primary: oklch(0.55 0.18 295);
+  --primary-foreground: oklch(0.98 0.005 290);
+
+  /* Secondary: Pale blush pink */
+  --secondary: oklch(0.94 0.03 350);
+  --secondary-foreground: oklch(0.35 0.06 300);
+
+  /* Muted: Soft lilac tint */
+  --muted: oklch(0.95 0.015 295);
+  --muted-foreground: oklch(0.5 0.02 300);
+
+  /* Accent: Warm rose / dusty pink complement */
+  --accent: oklch(0.68 0.14 10);
+  --accent-foreground: oklch(0.15 0.02 10);
+
+  --destructive: oklch(0.6 0.2 25);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  --border: oklch(0.91 0.01 290);
+  --input: oklch(0.92 0.01 290);
+  --ring: oklch(0.55 0.18 295);
+}
+
+.dark {
+  /* ✦ Lavender Dreams — Dark Mode: "Velvet Night" */
+  --background: oklch(0.12 0.03 295);
+  --foreground: oklch(0.95 0.01 290);
+
+  --card: oklch(0.16 0.03 295);
+  --card-foreground: oklch(0.95 0.01 290);
+
+  --popover: oklch(0.12 0.03 295);
+  --popover-foreground: oklch(0.95 0.01 290);
+
+  /* Lighter lavender for dark mode */
+  --primary: oklch(0.72 0.15 295);
+  --primary-foreground: oklch(0.12 0.03 295);
+
+  --secondary: oklch(0.22 0.03 295);
+  --secondary-foreground: oklch(0.95 0.01 290);
+
+  --muted: oklch(0.2 0.025 295);
+  --muted-foreground: oklch(0.65 0.02 295);
+
+  /* Warm rose accent in dark mode */
+  --accent: oklch(0.65 0.14 10);
+  --accent-foreground: oklch(0.95 0.01 10);
+
+  --destructive: oklch(0.6 0.2 25);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  --border: oklch(0.25 0.025 295);
+  --input: oklch(0.25 0.025 295);
+  --ring: oklch(0.72 0.15 295);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
