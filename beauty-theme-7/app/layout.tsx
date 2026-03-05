@@ -1,0 +1,47 @@
+import type { Metadata } from "next";
+import { Montserrat, Cormorant_Garamond } from "next/font/google";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import { CartProvider } from "@/context/CartContext";
+import { CartDrawer } from "@/components/cart/CartDrawer";
+import "./globals.css";
+
+const montserrat = Montserrat({
+  variable: "--font-sans",
+  subsets: ["latin"],
+});
+
+const cormorantGaramond = Cormorant_Garamond({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
+});
+
+export const metadata: Metadata = {
+  title: "Aura Beauty | Premium Skincare & Cosmetics",
+  description: "Discover premium skincare and beauty essentials for your natural glow.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body
+        className={`${montserrat.variable} ${cormorantGaramond.variable} antialiased min-h-screen flex flex-col font-sans bg-background text-foreground`}
+      >
+        <CartProvider>
+          <Header />
+          <CartDrawer />
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </CartProvider>
+      </body>
+    </html>
+  );
+}
