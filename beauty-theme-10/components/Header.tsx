@@ -27,12 +27,17 @@ export function Header() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const navLinks = navData.navLinks || [
+    const DEFAULT_NAV_LINKS = [
         { name: "Shop All", href: "/shop" },
         { name: "Rituals", href: "/concerns" },
         { name: "Botanicals", href: "/shop" },
         { name: "About", href: "/about" },
     ];
+
+    const navLinks = navData.navLinks?.map((link: any) => ({
+        href: link.href || link.url || "#",
+        name: link.name || link.label || "Link",
+    })) || DEFAULT_NAV_LINKS;
 
     return (
         <header

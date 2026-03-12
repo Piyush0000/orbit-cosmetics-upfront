@@ -7,6 +7,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetClose,
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { SearchOverlay } from "@/components/search/SearchOverlay";
+import { useStoreContext } from "@/context/store-context";
 
 export function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -20,12 +21,24 @@ export function Header() {
         });
     }
 
-    const navLinks = [
+    const context = useStoreContext() as any;
+    const customization = context?.customization;
+
+    const navData = customization?.headerSection || {};
+    const logoText = navData.logoText || customization?.storeName || "AURA";
+    const tagline = navData.tagline || "Ethereal Beauty Essentials";
+
+    const DEFAULT_NAV_LINKS = [
         { name: "Shop", href: "/shop" },
         { name: "Best Sellers", href: "/#bestsellers" },
         { name: "Concerns", href: "/concerns" },
         { name: "About Us", href: "/about" },
     ];
+
+    const navLinks = navData.navLinks?.map((link: any) => ({
+        href: link.href || link.url || "#",
+        name: link.name || link.label || "Link",
+    })) || DEFAULT_NAV_LINKS;
 
     return (
         <header className={`sticky top-0 z-50 w-full transition-all duration-700 ${isScrolled ? "bg-white/60 backdrop-blur-2xl border-b border-white/40 shadow-[0_8px_32px_rgba(110,80,250,0.06)]" : "bg-transparent"}`}>
@@ -44,15 +57,15 @@ export function Header() {
                                 <SheetHeader className="text-left px-0 border-b border-primary/10 pb-8">
                                     <SheetTitle className="font-serif text-3xl font-bold tracking-tight text-foreground flex items-center gap-3">
                                         <Gem className="w-6 h-6 text-primary" />
-                                        AURA
+                                        {logoText}
                                     </SheetTitle>
                                     <SheetDescription className="text-[11px] font-medium text-muted-foreground mt-2">
-                                        Ethereal Beauty Essentials
+                                        {tagline}
                                     </SheetDescription>
                                 </SheetHeader>
 
                                 <nav className="flex flex-col gap-6 mt-12">
-                                    {navLinks.map((link) => (
+                                    {navLinks.map((link: any) => (
                                         <SheetClose key={link.name} asChild>
                                             <Link
                                                 href={link.href}
@@ -65,7 +78,7 @@ export function Header() {
                                 </nav>
 
                                 <div className="mt-auto pt-8 border-t border-primary/10 text-[10px] font-medium text-muted-foreground/60">
-                                    <p>© 2026 Aura Prismatic.</p>
+                                    <p>© {new Date().getFullYear()} {logoText}.</p>
                                 </div>
                             </SheetContent>
                         </Sheet>
@@ -75,13 +88,13 @@ export function Header() {
                     <div className="hidden md:flex items-center">
                         <Link href="/" className="text-2xl font-serif font-bold tracking-tight text-foreground flex items-center gap-3 group">
                             <Gem className="w-6 h-6 text-primary group-hover:scale-110 transition-transform duration-500" />
-                            <span>AURA</span>
+                            <span>{logoText}</span>
                         </Link>
                     </div>
 
                     {/* Desktop Nav */}
                     <nav className="hidden md:flex gap-12 items-center">
-                        {navLinks.map((link) => (
+                        {navLinks.map((link: any) => (
                             <Link key={link.name} href={link.href} className="text-[11px] font-semibold text-foreground/60 hover:text-primary transition-all relative group">
                                 {link.name}
                                 <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-500 rounded-full"></span>

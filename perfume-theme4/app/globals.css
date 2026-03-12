@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+
+  /* Light Luxury Theme Palette */
+  --color-sand-50: #fbfaf9;
+  --color-sand-100: #f4f0ec;
+  --color-sand-200: #e8dfd5;
+  --color-sand-300: #d5c5b5;
+
+  --color-stone-400: #b0a39a;
+  --color-stone-600: #7c726a;
+  --color-stone-800: #4a433e;
+  --color-stone-900: #2d2824;
+  
+  --color-blush-100: #fcf6f5;
+  --color-blush-200: #f7e9e6;
+
+  /* Accent - Soft Rose Gold */
+  --color-rose-gold: #b78a82;
+  --color-rose-gold-light: #d6b8b3;
+
+  --animate-fade-in: fade-in 0.8s ease-out forwards;
+  --animate-slide-up: slide-up 0.8s ease-out forwards;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+}
+
+:root {
+  --background: #fbfaf9; /* sand-50 */
+  --foreground: #2d2824; /* stone-900 */
+}
+
+/* Force light theme always for this beautiful design */
+body {
+  background-color: var(--color-sand-50) !important;
+  color: var(--color-stone-900) !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.luxury-gradient {
+  background: linear-gradient(135deg, #fcf6f5 0%, #f4f0ec 100%);
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Base resets */
+.text-gold {
+  color: var(--color-rose-gold);
+}
+
+.bg-gold {
+  background-color: var(--color-rose-gold);
+}
+
+.border-gold {
+  border-color: var(--color-rose-gold);
+}

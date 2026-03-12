@@ -1,10 +1,34 @@
+"use client";
+
 import Link from "next/link";
 import { Facebook, Instagram, Twitter, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 
+import { useStoreContext } from "@/context/store-context";
+
 export function Footer() {
+    const context = useStoreContext() as any;
+    const customization = context?.customization;
+
+    const footerData = customization?.footerSection || {};
+    const logoText = footerData.logoText || customization?.headerSection?.logoText || customization?.storeName || "LUMIÈRE";
+    const copyrightText = footerData.copyrightText || `© ${new Date().getFullYear()} ${logoText}. All rights reserved.`;
+
+    const socialIcons: any = { Instagram, Facebook, Twitter };
+    
+    const DEFAULT_SOCIAL_LINKS = [
+        { platform: "Instagram", href: "#" },
+        { platform: "Facebook", href: "#" },
+        { platform: "Twitter", href: "#" },
+    ];
+
+    const socialLinks = footerData.socialLinks?.map((link: any) => ({
+        platform: link.platform || link.name || "Instagram",
+        href: link.url || link.href || "#",
+    })) || DEFAULT_SOCIAL_LINKS;
+
     return (
         <footer className="bg-gradient-to-b from-muted/20 to-muted/40 pt-16 pb-8 border-t border-border/30">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -13,7 +37,7 @@ export function Footer() {
                     <div className="col-span-1 md:col-span-1 space-y-6">
                         <Link href="/" className="text-2xl font-serif font-bold tracking-tight text-foreground flex items-center gap-2">
                             <Sparkles className="w-5 h-5 text-primary" />
-                            LUMIÈRE
+                            {logoText}
                         </Link>
                         <p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
                             Indulge in luxurious, clean beauty essentials crafted for your radiant self.
@@ -43,9 +67,14 @@ export function Footer() {
                     <div className="flex flex-col gap-4">
                         <h4 className="font-semibold text-foreground text-sm uppercase tracking-widest">Follow Us</h4>
                         <div className="flex gap-3">
-                            <Button variant="ghost" size="icon" className="hover:text-primary hover:bg-primary/8 rounded-full transition-all"><Instagram className="w-5 h-5" /></Button>
-                            <Button variant="ghost" size="icon" className="hover:text-primary hover:bg-primary/8 rounded-full transition-all"><Facebook className="w-5 h-5" /></Button>
-                            <Button variant="ghost" size="icon" className="hover:text-primary hover:bg-primary/8 rounded-full transition-all"><Twitter className="w-5 h-5" /></Button>
+                            {socialLinks.map((link: any, i: number) => {
+                                const Icon = socialIcons[link.platform] || Instagram;
+                                return (
+                                    <Button key={i} variant="ghost" size="icon" className="hover:text-primary hover:bg-primary/8 rounded-full transition-all">
+                                        <Icon className="w-5 h-5" />
+                                    </Button>
+                                );
+                            })}
                         </div>
                     </div>
                 </div>
@@ -53,7 +82,7 @@ export function Footer() {
                 <Separator className="bg-border/30" />
 
                 <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-                    <p>&copy; {new Date().getFullYear()} Lumière Beauty. All rights reserved.</p>
+                    <p>{copyrightText}</p>
                     <div className="flex gap-6">
                         <Link href="#" className="hover:text-primary transition-colors">Privacy</Link>
                         <Link href="#" className="hover:text-primary transition-colors">Terms</Link>

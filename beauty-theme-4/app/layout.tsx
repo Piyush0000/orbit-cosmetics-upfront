@@ -3,6 +3,7 @@ import { DM_Sans, Cormorant_Garamond } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
+import { StoreProvider } from "@/context/store-context";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import "./globals.css";
 
@@ -32,14 +33,16 @@ export default function RootLayout({
       <body
         className={`${dmSans.variable} ${cormorant.variable} antialiased min-h-screen flex flex-col font-sans bg-background text-foreground`}
       >
-        <CartProvider>
-          <Header />
-          <CartDrawer />
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer />
-        </CartProvider>
+        <StoreProvider>
+          <CartProvider>
+            <Header />
+            <CartDrawer />
+            <main className="flex-1">
+              {children}
+            </main>
+            <Footer />
+          </CartProvider>
+        </StoreProvider>
       </body>
     </html>
   );

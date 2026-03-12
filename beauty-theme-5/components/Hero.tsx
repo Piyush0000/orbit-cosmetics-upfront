@@ -1,8 +1,19 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { useStoreContext } from "@/context/store-context";
 
 export function Hero() {
+  const context = useStoreContext() as any;
+  const customization = context?.customization;
+
+  const heroData = customization?.heroSection || {};
+  const title = heroData.title || "Reveal Your<br /><span className=\"text-primary\">Inner Glow</span>";
+  const subtitle = heroData.subtitle || "Luxurious formulations crafted with care. Discover skincare that transforms your daily routine into a moment of indulgence.";
+  const ctaText = heroData.ctaText || "Shop Now";
+
   return (
     <section className="relative w-full min-h-[500px] sm:min-h-[600px] lg:min-h-[650px] flex items-center overflow-hidden bg-background">
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center py-10 sm:py-16">
@@ -10,24 +21,24 @@ export function Hero() {
           <div className="flex items-center gap-3 justify-center lg:justify-start">
             <div className="h-px w-8 sm:w-12 bg-primary/50" />
             <span className="text-primary text-xs sm:text-sm font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> New Collection 2024
+              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> New Collection {new Date().getFullYear()}
             </span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold font-serif leading-[1.08] text-foreground">
-            Reveal Your
-            <br />
-            <span className="text-primary">Inner Glow</span>
-          </h1>
+          <h1 
+            className="text-4xl sm:text-5xl lg:text-7xl font-bold font-serif leading-[1.08] text-foreground"
+            dangerouslySetInnerHTML={{ __html: title }}
+          />
 
-          <p className="text-base sm:text-lg text-muted-foreground max-w-md mx-auto lg:mx-0 leading-relaxed">
-            Luxurious formulations crafted with care. Discover skincare that transforms your daily routine into a moment of indulgence.
-          </p>
+          <p 
+            className="text-base sm:text-lg text-muted-foreground max-w-md mx-auto lg:mx-0 leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: subtitle }}
+          />
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-center lg:justify-start">
             <Link href="/shop" className="w-full sm:w-auto">
               <Button size="lg" className="w-full sm:w-auto text-base px-8 py-5 sm:py-6 rounded-full shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35 hover:scale-105 transition-all duration-300 gap-2">
-                Shop Now <ArrowRight className="w-4 h-4" />
+                {ctaText} <ArrowRight className="w-4 h-4" />
               </Button>
             </Link>
             <Link href="/#bestsellers" className="w-full sm:w-auto">

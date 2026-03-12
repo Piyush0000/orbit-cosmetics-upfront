@@ -1,9 +1,20 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Droplets, Leaf, Sparkles } from "lucide-react";
 import Image from "next/image";
+import { useStoreContext } from "@/context/store-context";
 
 export function Hero() {
+  const context = useStoreContext() as any;
+  const customization = context?.customization;
+
+  const heroData = customization?.heroSection || {};
+  const title = heroData.title || "Cocoa <br /><span className=\"italic font-light text-primary/80\">& Silk</span>";
+  const subtitle = heroData.subtitle || "Immerse yourself in formulations where high-end science meets artisanal botanical care. Sophisticated beauty, naturally refined.";
+  const ctaText = heroData.ctaText || "Shop Collection";
+
   return (
     <section className="relative w-full min-h-[700px] lg:min-h-[850px] flex items-center overflow-hidden bg-background py-16 lg:py-0">
       {/* Background Organic Texture */}
@@ -19,19 +30,19 @@ export function Hero() {
             </span>
           </div>
 
-          <h1 className="text-6xl sm:text-7xl lg:text-9xl font-serif leading-[0.95] text-foreground mb-8">
-            Cocoa <br />
-            <span className="italic font-light text-primary/80">& Silk</span>
-          </h1>
+          <h1
+            className="text-6xl sm:text-7xl lg:text-9xl font-serif leading-[0.95] text-foreground mb-8"
+            dangerouslySetInnerHTML={{ __html: title }}
+          />
 
           <p className="text-lg sm:text-xl text-muted-foreground/80 leading-relaxed mb-10 max-w-lg">
-            Immerse yourself in formulations where high-end science meets artisanal botanical care. Sophisticated beauty, naturally refined.
+            {subtitle}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto mb-16">
             <Link href="/shop" className="w-full sm:w-auto">
               <Button size="lg" className="w-full sm:w-auto text-base px-12 py-8 rounded-[2rem] bg-primary text-primary-foreground hover:bg-foreground hover:text-background transition-all duration-500 shadow-xl shadow-primary/20">
-                Shop Collection
+                {ctaText}
               </Button>
             </Link>
           </div>

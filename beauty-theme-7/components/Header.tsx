@@ -7,6 +7,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetClose,
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { SearchOverlay } from "@/components/search/SearchOverlay";
+import { useStoreContext } from "@/context/store-context";
 
 export function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -20,12 +21,24 @@ export function Header() {
         });
     }
 
-    const navLinks = [
+    const context = useStoreContext() as any;
+    const customization = context?.customization;
+
+    const navData = customization?.headerSection || {};
+    const logoText = navData.logoText || customization?.storeName || "AURA";
+    const tagline = navData.tagline || "Luxury Beauty & Skincare";
+
+    const DEFAULT_NAV_LINKS = [
         { name: "Shop", href: "/shop" },
         { name: "Best Sellers", href: "/#bestsellers" },
         { name: "Concerns", href: "/concerns" },
         { name: "About Us", href: "/about" },
     ];
+
+    const navLinks = navData.navLinks?.map((link: any) => ({
+        href: link.href || link.url || "#",
+        name: link.name || link.label || "Link",
+    })) || DEFAULT_NAV_LINKS;
 
     return (
         <header className={`sticky top-0 z-50 w-full transition-all duration-500 ${isScrolled ? "bg-background/90 backdrop-blur-xl shadow-sm shadow-primary/5 border-b border-border/40" : "bg-transparent"}`}>
@@ -45,15 +58,15 @@ export function Header() {
                                 <SheetHeader className="text-left px-0">
                                     <SheetTitle className="font-serif text-2xl font-bold flex items-center gap-2">
                                         <Gem className="w-5 h-5 text-primary" />
-                                        AURA
+                                        {logoText}
                                     </SheetTitle>
                                     <SheetDescription className="text-xs text-muted-foreground">
-                                        Luxury Beauty & Skincare
+                                        {tagline}
                                     </SheetDescription>
                                 </SheetHeader>
 
                                 <nav className="flex flex-col gap-5 mt-10">
-                                    {navLinks.map((link) => (
+                                    {navLinks.map((link: any) => (
                                         <SheetClose key={link.name} asChild>
                                             <Link
                                                 href={link.href}
@@ -66,7 +79,7 @@ export function Header() {
                                 </nav>
 
                                 <div className="mt-auto pb-8 text-sm text-muted-foreground">
-                                    <p>© 2024 Aura Beauty.</p>
+                                    <p>© {new Date().getFullYear()} {logoText}.</p>
                                 </div>
                             </SheetContent>
                         </Sheet>
@@ -76,13 +89,13 @@ export function Header() {
                     <div className="flex-1 flex items-center justify-center md:justify-start md:flex-none">
                         <Link href="/" className="text-2xl font-serif font-medium tracking-[0.2em] text-foreground flex items-center gap-2.5">
                             <Gem className="w-5 h-5 text-accent" />
-                            AURA
+                            {logoText}
                         </Link>
                     </div>
 
                     {/* Desktop Nav */}
                     <nav className="hidden md:flex gap-8 items-center">
-                        {navLinks.map((link) => (
+                        {navLinks.map((link: any) => (
                             <Link key={link.name} href={link.href} className="text-sm font-medium hover:text-primary transition-all duration-300 tracking-wide relative after:absolute after:bottom-[-6px] after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-[2px] after:bg-primary after:rounded-full after:transition-all after:duration-300 hover:after:w-full">
                                 {link.name}
                             </Link>

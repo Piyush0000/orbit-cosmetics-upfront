@@ -1,32 +1,43 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Gem } from "lucide-react";
+import { useStoreContext } from "@/context/store-context";
 
 export function Hero() {
+  const context = useStoreContext() as any;
+  const customization = context?.customization;
+
+  const heroData = customization?.heroSection || {};
+  const title = heroData.title || "Unveil Your<br /><span className=\"text-primary\">True Aura</span>";
+  const subtitle = heroData.subtitle || "Luxurious formulations crafted with care. Discover skincare that transforms your daily routine into a moment of indulgence.";
+  const ctaText = heroData.ctaText || "Shop Now";
+
   return (
     <section className="relative w-full min-h-[520px] sm:min-h-[600px] lg:min-h-[680px] flex items-center overflow-hidden bg-gradient-to-b from-background via-background to-muted/30">
       <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-16 sm:py-24">
         {/* Floating badge */}
         <div className="flex items-center gap-3 justify-center mb-6">
           <span className="inline-flex items-center gap-2 py-1.5 px-5 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase">
-            <Gem className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> New Collection 2024
+            <Gem className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> New Collection {new Date().getFullYear()}
           </span>
         </div>
 
-        <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold font-serif leading-[1.05] text-foreground mb-6">
-          Unveil Your
-          <br />
-          <span className="text-primary">True Aura</span>
-        </h1>
+        <h1 
+            className="text-4xl sm:text-6xl lg:text-8xl font-bold font-serif leading-[1.05] text-foreground mb-6"
+            dangerouslySetInnerHTML={{ __html: title }}
+        />
 
-        <p className="text-base sm:text-lg text-muted-foreground max-w-lg mx-auto leading-relaxed mb-8 sm:mb-10">
-          Luxurious formulations crafted with care. Discover skincare that transforms your daily routine into a moment of indulgence.
-        </p>
+        <p 
+            className="text-base sm:text-lg text-muted-foreground max-w-lg mx-auto leading-relaxed mb-8 sm:mb-10"
+            dangerouslySetInnerHTML={{ __html: subtitle }}
+        />
 
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-center mb-12 sm:mb-16">
           <Link href="/shop" className="w-full sm:w-auto">
             <Button size="lg" className="w-full sm:w-auto text-base px-10 py-5 sm:py-6 rounded-full shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35 hover:scale-105 transition-all duration-300 gap-2">
-              Shop Now <ArrowRight className="w-4 h-4" />
+              {ctaText} <ArrowRight className="w-4 h-4" />
             </Button>
           </Link>
           <Link href="/#bestsellers" className="w-full sm:w-auto">

@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+
+  /* Midnight Elixir Dark Theme Palette */
+  --color-obsidian-950: #050505;
+  --color-obsidian-900: #0a0a0a;
+  --color-obsidian-800: #141414;
+  --color-obsidian-700: #222222;
+
+  --color-onyx-600: #333333;
+  --color-onyx-500: #555555;
+  --color-onyx-400: #777777;
+  
+  --color-pearl-100: #f8f8f8;
+  --color-pearl-200: #eeeeee;
+  --color-pearl-300: #e0e0e0;
+
+  /* Accent - Rich Gold */
+  --color-rich-gold: #D4AF37;
+  --color-rich-gold-light: #e6c565;
+  --color-rich-gold-dark: #b5952f;
+
+  --animate-fade-in: fade-in 0.8s ease-out forwards;
+  --animate-slide-up: slide-up 0.8s ease-out forwards;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow: glow 3s ease-in-out infinite alternate;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+
+  @keyframes glow {
+    from { box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
+    to { box-shadow: 0 0 20px rgba(212, 175, 55, 0.6); }
+  }
+}
+
+:root {
+  --background: #0a0a0a; /* obsidian-900 */
+  --foreground: #f8f8f8; /* pearl-100 */
+}
+
+/* Force dark theme always for this beautiful design */
+body {
+  background-color: var(--color-obsidian-900) !important;
+  color: var(--color-pearl-100) !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.luxury-gradient {
+  background: linear-gradient(135deg, #141414 0%, #0a0a0a 100%);
+}
+
+.glass-panel {
+  background: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.15); /* Suble gold border */
+}
+
+/* Base resets */
+.text-gold {
+  color: var(--color-rich-gold);
+}
+
+.bg-gold {
+  background-color: var(--color-rich-gold);
+}
+
+.border-gold {
+  border-color: var(--color-rich-gold);
+}

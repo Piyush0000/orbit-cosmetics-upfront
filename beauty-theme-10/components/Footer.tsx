@@ -19,11 +19,16 @@ export function Footer() {
     const copyrightText = footerData.copyrightText || `© ${new Date().getFullYear()} ${logoText} Zen Botanical. Crafted for Purity.`;
 
     const socialIcons: any = { Instagram, Facebook, Twitter };
-    const socialLinks = footerData.socialLinks || [
+    const DEFAULT_SOCIAL_LINKS = [
         { platform: "Instagram", href: "#" },
         { platform: "Facebook", href: "#" },
         { platform: "Twitter", href: "#" },
     ];
+
+    const socialLinks = footerData.socialLinks?.map((link: any) => ({
+        platform: link.platform || link.name || "Instagram",
+        href: link.url || link.href || "#",
+    })) || DEFAULT_SOCIAL_LINKS;
 
     return (
         <footer className="bg-primary/5 pt-24 pb-12 border-t border-primary/10">

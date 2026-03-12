@@ -4,7 +4,29 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 
+import { useStoreContext } from "@/context/store-context";
+
 export function Footer() {
+    const context = useStoreContext() as any;
+    const customization = context?.customization;
+
+    const footerData = customization?.footerSection || {};
+    const logoText = footerData.logoText || customization?.headerSection?.logoText || customization?.storeName || "AURA PRISMATIC";
+    const copyrightText = footerData.copyrightText || `© ${new Date().getFullYear()} ${logoText}. The light is yours.`;
+
+    const socialIcons: any = { Instagram, Facebook, Twitter };
+    
+    const DEFAULT_SOCIAL_LINKS = [
+        { platform: "Instagram", href: "#" },
+        { platform: "Facebook", href: "#" },
+        { platform: "Twitter", href: "#" },
+    ];
+
+    const socialLinks = footerData.socialLinks?.map((link: any) => ({
+        platform: link.platform || link.name || "Instagram",
+        href: link.url || link.href || "#",
+    })) || DEFAULT_SOCIAL_LINKS;
+
     return (
         <footer className="bg-white/40 pt-24 pb-12 border-t border-primary/10 mt-20 relative overflow-hidden backdrop-blur-3xl">
             {/* Prismatic Underglow */}
@@ -18,7 +40,7 @@ export function Footer() {
                     <div className="md:col-span-5 space-y-10">
                         <Link href="/" className="text-3xl font-serif font-bold tracking-tight text-foreground flex items-center gap-4 group">
                             <Gem className="w-7 h-7 text-primary group-hover:rotate-180 transition-transform duration-1000" />
-                            <span className="text-gradient">AURA PRISMATIC</span>
+                            <span className="text-gradient">{logoText}</span>
                         </Link>
                         <p className="text-muted-foreground text-[11px] font-medium leading-[2.2] max-w-sm">
                             Harnessing the refractive power of mineral science to create skincare that illuminates from within. Ethereal care, scientifically refined.
@@ -43,6 +65,7 @@ export function Footer() {
                         <Link href="#" className="text-[11px] font-semibold text-muted-foreground hover:text-primary transition-colors">New Phase</Link>
                     </div>
 
+                    {/* Nav Links */}
                     <div className="md:col-span-2 flex flex-col gap-6">
                         <h4 className="font-bold text-primary text-[10px] tracking-[0.3em] uppercase mb-4">Integrity</h4>
                         <Link href="#" className="text-[11px] font-semibold text-muted-foreground hover:text-primary transition-colors">Tracing</Link>
@@ -53,15 +76,20 @@ export function Footer() {
                     <div className="md:col-span-3 flex flex-col gap-6">
                         <h4 className="font-bold text-primary text-[10px] tracking-[0.3em] uppercase mb-4">Network</h4>
                         <div className="flex gap-4 mt-2">
-                            <Button variant="ghost" size="icon" className="hover:bg-primary/5 rounded-full border border-primary/10 p-2 transition-all"><Instagram className="w-4 h-4 text-primary" /></Button>
-                            <Button variant="ghost" size="icon" className="hover:bg-primary/5 rounded-full border border-primary/10 p-2 transition-all"><Facebook className="w-4 h-4 text-primary" /></Button>
-                            <Button variant="ghost" size="icon" className="hover:bg-primary/5 rounded-full border border-primary/10 p-2 transition-all"><Twitter className="w-4 h-4 text-primary" /></Button>
+                            {socialLinks.map((link: any, i: number) => {
+                                const Icon = socialIcons[link.platform] || Instagram;
+                                return (
+                                    <Button key={i} variant="ghost" size="icon" className="hover:bg-primary/5 rounded-full border border-primary/10 p-2 transition-all">
+                                        <Icon className="w-4 h-4 text-primary" />
+                                    </Button>
+                                );
+                            })}
                         </div>
                     </div>
                 </div>
 
                 <div className="pt-12 border-t border-primary/10 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-semibold text-muted-foreground/50 tracking-widest">
-                    <p>&copy; 2026 Aura Prismatic. The light is yours.</p>
+                    <p>{copyrightText}</p>
                     <div className="flex gap-12">
                         <Link href="#" className="hover:text-primary transition-colors">Molecular Privacy</Link>
                         <Link href="#" className="hover:text-primary transition-colors">Terms of Phase</Link>
