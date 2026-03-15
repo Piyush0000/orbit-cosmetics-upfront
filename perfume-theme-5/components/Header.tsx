@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Search, Heart, ShoppingBag, User, Menu, X, ChevronDown } from "lucide-react";
+import { Search, Heart, ShoppingBag, Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/context/CartContext";
 import { useStoreContext } from "@/context/store-context";
@@ -115,9 +115,7 @@ export default function Header() {
                                     )}
                                 </div>
                             </Link>
-                            <button className="p-2 hover:text-rich-gold transition-colors hidden sm:block" aria-label="Account">
-                                <User className="w-5 h-5 stroke-[1.5]" />
-                            </button>
+
 
                             {/* Mobile Menu Button */}
                             <button
@@ -181,12 +179,7 @@ export default function Header() {
                             </Link>
                         ))}
                         <div className="flex gap-8 mt-10 justify-center border-t border-onyx-600 pt-10">
-                            <Link href="/account" className="flex flex-col items-center gap-3 text-[10px] uppercase tracking-[0.2em] text-pearl-300 hover:text-rich-gold transition-colors" onClick={() => setMobileMenuOpen(false)}>
-                                <div className="w-12 h-12 bg-obsidian-800 rounded-full flex items-center justify-center border border-rich-gold/30 shadow-sm">
-                                    <User className="w-5 h-5 stroke-[1.5]" />
-                                </div>
-                                Account
-                            </Link>
+
                             <Link href="/wishlist" className="flex flex-col items-center gap-3 text-[10px] uppercase tracking-[0.2em] text-pearl-300 hover:text-rich-gold transition-colors" onClick={() => setMobileMenuOpen(false)}>
                                 <div className="w-12 h-12 bg-obsidian-800 rounded-full flex items-center justify-center border border-rich-gold/30 shadow-sm">
                                     <Heart className="w-5 h-5 stroke-[1.5]" />
